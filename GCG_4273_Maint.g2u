@@ -1,0 +1,305 @@
+Program.Sub.ScreenSU.Start
+Gui.Form..Create
+Gui.Form..Size(15405,5055)
+Gui.Form..MinX(0)
+Gui.Form..MinY(0)
+Gui.Form..Position(0,0)
+Gui.Form..BackColor(-2147483633)
+Gui.Form..MousePointer(0)
+Gui.Form..Sizeable(False)
+Gui.Form..Event(UnLoad,Form_UnLoad)
+Gui.Form..Caption("Furnace Maintenance")
+Gui.Form.GsGridControl1.Create(GsGridControl)
+Gui.Form.GsGridControl1.Size(14790,2775)
+Gui.Form.GsGridControl1.Position(180,1035)
+Gui.Form.GsGridControl1.Event(CellValueChanged,GsGridControl1_CellValueChanged)
+Gui.Form.cmdAdd.Create(Button)
+Gui.Form.cmdAdd.Size(1095,405)
+Gui.Form.cmdAdd.Position(1605,510)
+Gui.Form.cmdAdd.Caption("Add")
+Gui.Form.cmdAdd.FontSize(10)
+Gui.Form.cmdAdd.Event(Click,cmdAdd_Click)
+Gui.Form.cmdDelete.Create(Button)
+Gui.Form.cmdDelete.Size(1395,435)
+Gui.Form.cmdDelete.Position(13545,4005)
+Gui.Form.cmdDelete.Caption("Delete")
+Gui.Form.cmdDelete.FontSize(16)
+Gui.Form.cmdDelete.Event(Click,cmdDelete_Click)
+Gui.Form.lblAddANewFurnace.Create(Label,"Add a New Furnace to Maintain",True,2985,255,0,210,240,True,0,"Arial",8,-2147483633,0)
+Gui.Form.txtFurnace.Create(TextBox,"",True,1215,300,0,225,570,True,0,"Arial",8,-2147483643,1)
+Gui.Form.txtFurnace.MaxLength(6)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'this is the maintenance program for proj 4273 for the furnace schedule
+'programmer: WAW
+'date: 12/18/16
+
+'open connection
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN, V.Ambient.PUser, V.Ambient.PPass)
+
+'initial load of screen
+f.Intrinsic.Control.CallSub(load_screen)
+
+'display the screen
+gui.Form..Visible(True)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Form_UnLoad.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'close the form
+gui.Form..Visible(false)
+
+'closing connection and ending program
+F.ODBC.Connection!conx.Close
+
+f.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.End
+
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Form_UnLoad.End
+
+Program.Sub.cmdDelete_Click.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.I.Declare(long)
+v.Local.schecked.Declare(string)
+v.Local.ssql.Declare(string)
+'
+'f.Data.DataView.Create("MAINTCLONE","MAINT")
+
+'loop through the datatable
+F.Intrinsic.Control.For(v.Local.i,0,v.dataTable.MAINT.RowCount--,1)
+	'check to see if selected
+	f.Intrinsic.Control.If(v.DataTable.MAINT(v.Local.I).Select.fieldvaltrim,=,"True")
+		f.Intrinsic.String.Build("Delete from GCG_4273_FURNACE_MNT where FURNACE = '{0}'",v.DataTable.MAINT(v.Local.I).FURNACE.fieldvaltrim,v.Local.ssql)
+		f.ODBC.Connection!conx.Execute(v.Local.ssql)
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Next(v.Local.I)
+
+'close the datatable
+f.Data.DataTable.Close("MAINT")
+
+'load screen agian
+f.Intrinsic.Control.CallSub(load_screen)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmdDelete_Click.End
+
+Program.Sub.cmdAdd_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdDelete_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+v.Local.sfurnace.Declare(string)
+v.Local.ssql.Declare(string)
+
+'check to see if new furnace is blank
+f.Intrinsic.Control.If(v.Screen.Form!txtFurnace.Text,=,"")
+	'inform the user and exit sub
+	f.Intrinsic.UI.Msgbox("Please enter a furnace")
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.Else
+	'get the new furnace
+	v.Local.sfurnace.Set(v.Screen.Form!txtFurnace.Text)
+f.Intrinsic.Control.EndIf
+
+'check to see if the furn
+f.Intrinsic.String.Build("Select * From GCG_4273_FURNACE_MNT where furnace = '{0}'",v.Local.sfurnace.Trim,v.Local.ssql)
+F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+	'inform the user this furnace already exists
+	f.Intrinsic.UI.Msgbox("The furnace you have entered already exists")
+	'clear the textbox
+	gui.Form.txtFurnace.Text("")
+	f.ODBC.conx!rst.Close
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.Else
+	f.Data.DataTable.Close("MAINT")
+	f.ODBC.conx!rst.AddNew
+	f.ODBC.conx!rst.Set!FURNACE(V.Local.sfurnace.Trim)
+	f.ODBC.conx!rst.Set!SETTING_HOURS(0)
+'	f.ODBC.conx!rst.Set!SINTERING_TIME(0)
+	f.ODBC.conx!rst.Set!DOWN_TIME(0)
+'	f.ODBC.conx!rst.Set!PARTS_PER_TRAY(0)
+	f.ODBC.conx!rst.Set!TRAYS_PER_FULL_lOAD(0)
+	f.ODBC.conx!rst.Set!RUNS_BEFORE_MAINT(0)
+	f.ODBC.conx!rst.Set!MAINT_HOURS(0)
+	f.ODBC.conx!rst.Update	
+f.Intrinsic.Control.EndIf
+f.ODBC.conx!rst.Close
+
+'clear the textbox
+gui.Form.txtFurnace.Text("")
+
+'call the load screen sub
+f.Intrinsic.Control.CallSub(load_screen)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdDelete_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmdAdd_Click.End
+
+Program.Sub.Load_Screen.Start
+F.Intrinsic.Control.SetErrorHandler("Load_Screen_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+v.Local.ssql.Declare(string)
+
+'query for all data and place in a datatable
+f.Intrinsic.String.Build("Select * From GCG_4273_FURNACE_MNT where FURNACE <> '{0}'","",v.Local.ssql)
+
+'create the data table
+f.Data.DataTable.CreateFromSQL("MAINT","Conx",v.Local.ssql,true)
+
+f.Data.DataTable.AddColumn("MAINT","Select","Boolean","False")
+'f.Data.DataTable.Clone("MAINT","MAINTCLONE",True)
+
+'create the dataview
+f.data.dataview.create("MAINT","MAINT")
+gui.Form.GsGridControl1.AddGridviewFromDataview("MAINT","MAINT","MAINT")
+
+gui.Form.GsGridControl1.SetGridviewProperty("MAINT","Editable",True)
+'format the column titles
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE","Caption","Furnace")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE","READONLY",True)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","Select","Readonly",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","Select","HeaderHAlignment","Center")
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_LOAD","Caption","Load")
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_LOAD","READONLY",False)
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_LOAD","HeaderHAlignment","Center")
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_LOAD","Visible",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","SETTING_HOURS","Caption","Setting Hrs")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","SETTING_HOURS","READONLY",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","SETTING_HOURS","HeaderHAlignment","Center")
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","SINTERING_TIME","Caption","Sintering Time")
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","SINTERING_TIME","READONLY",False)
+'gui.Form.GsGridControl1.SetColumnProperty("MAINT","SINTERING_TIME","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","DOWN_TIME","Caption","Down Time (Hrs)")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","DOWN_TIME","READONLY",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","DOWN_TIME","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_TIME","Caption","Furnace Time")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_TIME","READONLY",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_TIME","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","TRAYS_PER_FULL_LOAD","Caption","Trays Per Full Load")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","TRAYS_PER_FULL_LOAD","READONLY",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","TRAYS_PER_FULL_LOAD","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","RUNS_BEFORE_MAINT","Caption","Runs Before Maint")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","RUNS_BEFORE_MAINT","READONLY",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","RUNS_BEFORE_MAINT","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","MAINT_HOURS","Caption","Maint Hours")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","MAINT_HOURS","READONLY",False)
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","MAINT_HOURS","HeaderHAlignment","Center")
+gui.Form.GsGridControl1.SetColumnProperty("MAINT","FURNACE_TIME","VisibleIndex","3")
+
+gui.Form.GsGridControl1.MainView("MAINT")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Load_Screen_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Load_Screen.End
+
+Program.Sub.GsGridControl1_CellValueChanged.Start
+F.Intrinsic.Control.SetErrorHandler("Preflight_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+v.Local.ssql.Declare(string)
+v.Local.svalue.Declare(string)
+v.Local.i.Declare(long)
+
+'set the value
+v.Local.svalue.Set(v.Args.value)
+
+f.Intrinsic.Control.If(v.Local.svalue,<>,True)
+f.Intrinsic.Control.AndIf(v.Local.svalue,<>,False)
+	'loop through the datatable
+	F.Intrinsic.Control.For(v.Local.i,0,v.dataTable.MAINT.RowCount--,1)
+		'update the tables
+'		f.Intrinsic.String.Build("Update GCG_4273_FURNACE_MNT SET SETTING_HOURS = '{1}', SINTERING_TIME = '{2}', DOWN_TIME = '{3}'",v.DataTable.MAINT(v.Local.I).FURNACE_LOAD.fieldvaltrim,v.DataTable.MAINT(v.Local.I).SETTING_HOURS.fieldvaltrim,v.DataTable.MAINT(v.Local.I).SINTERING_TIME.fieldvaltrim,v.DataTable.MAINT(v.Local.I).DOWN_TIME.fieldvaltrim,v.Local.ssql) 
+		f.Intrinsic.String.Build("Update GCG_4273_FURNACE_MNT SET SETTING_HOURS = '{0}', DOWN_TIME = '{1}'",v.DataTable.MAINT(v.Local.I).SETTING_HOURS.fieldvaltrim,v.DataTable.MAINT(v.Local.I).DOWN_TIME.fieldvaltrim,v.Local.ssql) 
+		f.Intrinsic.String.Build("{0}, FURNACE_TIME = '{1}', TRAYS_PER_FULL_LOAD = '{2}', RUNS_BEFORE_MAINT = '{3}'",v.Local.ssql.Trim,v.DataTable.MAINT(v.Local.I).FURNACE_TIME.fieldvaltrim,v.DataTable.MAINT(v.Local.I).TRAYS_PER_FULL_LOAD.fieldvaltrim,v.DataTable.MAINT(v.Local.I).RUNS_BEFORE_MAINT.fieldvaltrim,v.Local.ssql)
+		f.Intrinsic.String.Build("{0}, MAINT_HOURS = '{1}' where FURNACE = '{2}'",v.Local.ssql.Trim,v.DataTable.MAINT(v.Local.I).MAINT_HOURS.fieldvaltrim,v.DataTable.MAINT(v.Local.I).FURNACE.fieldvaltrim,v.Local.ssql)
+		f.ODBC.Connection!conx.Execute(v.Local.ssql)
+	f.Intrinsic.Control.Next(v.Local.I)
+	'close the datatable
+	f.Data.DataTable.Close("MAINT")
+	'load screen agian
+	f.Intrinsic.Control.CallSub(load_screen)
+f.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Preflight_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.GsGridControl1_CellValueChanged.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$WAW$}$12/18/2016 7:33:04 PM$}$False
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This was coded by FEQ on December 2016. It adds a screen to the script 1 button on the inventory master screen to save furnace information to parts, as well as a screen to add a furnace to a work order on the work order header screen
+Program.Sub.Comments.End
