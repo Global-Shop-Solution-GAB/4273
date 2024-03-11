@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SyntaxEdit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Pages>
+    <DefaultPage>
+      <Header />
+      <Footer />
+    </DefaultPage>
+  </Pages>
+  <DisplayStrings />
+  <Selection>
+    <SelectionRect>
+      <Location>
+        <X>0</X>
+        <Y>274</Y>
+      </Location>
+      <Size>
+        <Width>24</Width>
+        <Height>3</Height>
+      </Size>
+      <X>0</X>
+      <Y>274</Y>
+      <Width>24</Width>
+      <Height>3</Height>
+    </SelectionRect>
+    <Options>UseColors OverwriteBlocks SelectLineOnTripleClick CopyLineWhenEmpty SelectWordOnCtrlClick</Options>
+  </Selection>
+  <Gutter>
+    <Options>PaintLineNumbers PaintBookMarks PaintLineModificators</Options>
+  </Gutter>
+  <Margin>
+    <Visible>false</Visible>
+  </Margin>
+  <LineStyles />
+  <LineSeparator />
+  <Printing>
+    <Footer />
+    <Header />
+  </Printing>
+  <WhiteSpace />
+  <TextSource>
+    <Position>
+      <X>0</X>
+      <Y>274</Y>
+    </Position>
+    <Lexer>
+      <Scheme>
+        <Author>Quantum Whale, LLC.</Author>
+        <Copyright>Copyright (c) 2004 - 2014 Quantum Whale LLC.</Copyright>
+        <FileType>gas</FileType>
+        <Version>1.5</Version>
+        <Styles>
+          <Style>
+            <Name>idents</Name>
+            <ForeColor>ControlText</ForeColor>
+          </Style>
+          <Style>
+            <Name>numbers</Name>
+            <ForeColor>ControlText</ForeColor>
+          </Style>
+          <Style>
+            <Name>reswords</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>comments</Name>
+            <ForeColor>Green</ForeColor>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>xmlcomments</Name>
+            <ForeColor>Gray</ForeColor>
+          </Style>
+          <Style>
+            <Name>symbols</Name>
+            <ForeColor>WindowText</ForeColor>
+          </Style>
+          <Style>
+            <Name>whitespace</Name>
+            <ForeColor>WindowText</ForeColor>
+          </Style>
+          <Style>
+            <Name>strings</Name>
+            <ForeColor>Maroon</ForeColor>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>directives</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>htmlparams</Name>
+            <ForeColor>Red</ForeColor>
+          </Style>
+          <Style>
+            <Name>syntax errors</Name>
+            <ForeColor>Red</ForeColor>
+          </Style>
+          <Style>
+            <Name>codes nippets</Name>
+            <ForeColor>Black</ForeColor>
+            <BackColor>255:180:228:180</BackColor>
+          </Style>
+          <Style>
+            <Name>GabReservedWords</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabTokenWithBrackets</Name>
+            <ForeColor>Gray</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabFunctionIntrinsicDebug</Name>
+            <ForeColor>White</ForeColor>
+            <BackColor>Red</BackColor>
+            <FontStyle>Bold</FontStyle>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>GabVariable</Name>
+            <ForeColor>Teal</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabVariableSystemDefined</Name>
+            <ForeColor>Teal</ForeColor>
+            <FontStyle>Bold Italic</FontStyle>
+          </Style>
+          <Style>
+            <Name>GabGui</Name>
+            <ForeColor>OrangeRed</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabProgramSubStartEnd</Name>
+            <ForeColor>Black</ForeColor>
+            <BackColor>LightGray</BackColor>
+            <FontStyle>Bold</FontStyle>
+            <PlainText>true</PlainText>
+          </Style>
+        </Styles>
+      </Scheme>
+    </Lexer>
+    <TextStrings>
+      <Lines>
+        <string>Program.Sub.ScreenSU.Start</string>
+        <string>Gui.ReportProcess..Create</string>
+        <string>Gui.ReportProcess..Caption("Report Process")</string>
+        <string>Gui.ReportProcess..Size(5025,1815)</string>
+        <string>Gui.ReportProcess..MinX(0)</string>
+        <string>Gui.ReportProcess..MinY(0)</string>
+        <string>Gui.ReportProcess..Position(0,0)</string>
+        <string>Gui.ReportProcess..BackColor(-2147483633)</string>
+        <string>Gui.ReportProcess..MousePointer(0)</string>
+        <string>Gui.ReportProcess..Event(UnLoad,ReportProcess_UnLoad)</string>
+        <string>Gui.ReportProcess.dtpBeg.Create(DatePicker)</string>
+        <string>Gui.ReportProcess.dtpBeg.Size(1935,285)</string>
+        <string>Gui.ReportProcess.dtpBeg.Position(135,435)</string>
+        <string>Gui.ReportProcess.dtpEnd.Create(DatePicker)</string>
+        <string>Gui.ReportProcess.dtpEnd.Size(1935,285)</string>
+        <string>Gui.ReportProcess.dtpEnd.Position(2475,435)</string>
+        <string>Gui.ReportProcess.lbl1.Create(Label,"Beginning",True,1935,255,0,135,210,True,0,"Arial",8,-2147483633,0)</string>
+        <string>Gui.ReportProcess.lbl2.Create(Label,"Ending",True,1935,255,0,2475,210,True,0,"Arial",8,-2147483633,0)</string>
+        <string>Gui.ReportProcess.lbl2.ForeColor(0)</string>
+        <string>Gui.ReportProcess.cmdPrint.Create(Button)</string>
+        <string>Gui.ReportProcess.cmdPrint.Size(855,375)</string>
+        <string>Gui.ReportProcess.cmdPrint.Position(135,915)</string>
+        <string>Gui.ReportProcess.cmdPrint.Caption("Print")</string>
+        <string>Gui.ReportProcess.cmdPrint.Event(Click,cmdPrint_Click)</string>
+        <string>Program.Sub.ScreenSU.End</string>
+        <string />
+        <string>Program.Sub.Preflight.Start</string>
+        <string>v.Global..BulkDeclareLong(iBIRunID,iBILogID)</string>
+        <string />
+        <string>Program.Sub.Preflight.End</string>
+        <string />
+        <string>Program.Sub.Main.Start</string>
+        <string>'After getting the work orders look at each sequence to determine where time should be applied:</string>
+        <string>'if work group = 'MOLD', use runtime for Molding, if not in this work group the work center will be checked if equal to: ML01,ML02,ML03,ML04,ML05,ML06,ML07</string>
+        <string>'if work center = 'DS01', use runtime for Debinding</string>
+        <string>'if work center = 'ST01' use runtime for Setting</string>
+        <string>'if not at any of the listed work groups or work centers if LMO = O, use leadtime for external secondaries</string>
+        <string>'if not at any of the listed work groups or work centers if LMO &lt;&gt; O, use leadtime for internal secondaries</string>
+        <string />
+        <string>F.Intrinsic.Control.SetErrorHandler("PreProc_Main_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN, V.Ambient.PUser, V.Ambient.PPass)</string>
+        <string>'(V.Ambient.PDSN, V.Ambient.PUser, V.Ambient.PPass)</string>
+        <string>'("Global_PLA","Master","Master")</string>
+        <string />
+        <string>gui.ReportProcess..Show(True)</string>
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("PreProc_Main_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4273_PreProc.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	f.Intrinsic.Control.CallSub(ReportProcess_UnLoad)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Main.End</string>
+        <string />
+        <string>Program.Sub.ReportProcess_UnLoad.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("PreProc_Main_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>gui.ReportProcess..Visible(false)</string>
+        <string>F.ODBC.Connection!conx.Close</string>
+        <string>f.Intrinsic.Control.End</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("PreProc_Main_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4273_PreProc.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	f.Intrinsic.Control.End</string>
+        <string />
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.ReportProcess_UnLoad.End</string>
+        <string />
+        <string>Program.Sub.cmdPrint_Click.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Print_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local..BulkDeclareString(sError, sMap, sFurnanceHold, sWO_per_Furnace, sHold)</string>
+        <string>V.Local..BulkDeclareFloat(fLeadTime, fHold, fMold, fDebind, fSetting, fInt_Secondaries, fExt_Secondaries, fTotalHours)</string>
+        <string>V.Local..BulkDeclareLong(iCounter, iCounterWO_Details, iHold)</string>
+        <string>v.Local.sSql.Declare(string,"Delete from GCG_4273_FURNACE_RPT")</string>
+        <string>v.Local.dDateHold.Declare(date)</string>
+        <string>v.Local.sdate.Declare(String)</string>
+        <string />
+        <string>'Date check</string>
+        <string>f.Intrinsic.Control.If(v.Screen.ReportProcess!dtpBeg.Value,&gt;,v.Screen.ReportProcess!dtpEnd.Value)</string>
+        <string>	f.Intrinsic.UI.Msgbox("Ending Date must be after Beginning Date","Date Configuration")</string>
+        <string>	f.Intrinsic.Control.ExitSub</string>
+        <string>f.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.UI.InvokeWaitDialog("Starting Process","Report Generation")</string>
+        <string />
+        <string>Gui.ReportProcess..Visible(False)</string>
+        <string />
+        <string>'Delete data of previous report</string>
+        <string>f.ODBC.Connection!conx.Execute(v.Local.sSql)</string>
+        <string />
+        <string>'Create DataTable for Report</string>
+        <string>V.Local.sSql.Set("select JOB, SUFFIX, jh.PART, jh.LOCATION, fm.FURNACE, fm.TRAYS_PER_FULL_LOAD, jh.DATE_DUE, jh.QTY_ORDER ")</string>
+        <string>F.Intrinsic.String.Build("{0} {1}",V.Local.sSql, ", pf.NUM_PARTS_PER_TRAY, fm.TRAYS_PER_FULL_LOAD ", V.Local.sSql) </string>
+        <string>F.Intrinsic.String.Build("{0} {1}",V.Local.sSql, " from V_JOB_HEADER jh ", V.Local.sSql) </string>
+        <string>F.Intrinsic.String.Build("{0} {1}",V.Local.sSql, " JOIN GCG_4273_PART_FURN pf ON pf.PART = jh.PART and pf.LOC = jh.LOCATION ", V.Local.sSql) </string>
+        <string>F.Intrinsic.String.Build("{0} {1}",V.Local.sSql, " JOIN GCG_4273_FURNACE_MNT fm ON fm.FURNACE = pf.FURNACE ", V.Local.sSql)</string>
+        <string>F.Intrinsic.String.Build("{0} {1} '{2}' and '{3}'",V.Local.sSql, "where DATE_DUE between ",v.Screen.ReportProcess!dtpBeg.Value.PervasiveDate,v.Screen.ReportProcess!dtpEnd.Value.PervasiveDate, V.Local.sSql)</string>
+        <string>F.Intrinsic.String.Build("{0} {1}",V.Local.sSql, "and DATE_CLOSED = '1900-01-01' ", V.Local.sSql)</string>
+        <string />
+        <string>F.Data.DataTable.CreateFromSQL("PreProc", "conx", V.Local.sSql , true)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "FURNACE_DATE", "date")</string>
+        <string />
+        <string>'This part was added to check if there is a sintering step on the work order, if not remove it from the datatable</string>
+        <string>f.Intrinsic.Control.For(v.Local.iCounter,0,v.dataTable.Preproc.RowCount--,1)</string>
+        <string>	f.Intrinsic.String.Build("select DATE_DUE from JOB_OPERATIONS where PART &lt;&gt; '{0}'","",v.Local.ssql)</string>
+        <string>'	f.Intrinsic.String.Build("select DATE_DUE from JOB_OPERATIONS where PART = '{0}' and JOB = '{1}'","SNTR",v.datatable.PreProc(v.Local.icounter).JOB.fieldvaltrim,v.Local.ssql)</string>
+        <string>	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSQL)</string>
+        <string>	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)</string>
+        <string>		f.Data.DataTable.DeleteRow("PreProc",v.Local.iCounter)</string>
+        <string>	f.Intrinsic.Control.Else</string>
+        <string>		v.Local.sdate.Set(v.ODBC.conx!rst.FieldValTrim!DATE_DUE)</string>
+        <string>		f.Intrinsic.String.Format(v.Local.sdate,"##/##/##",v.Local.sdate)</string>
+        <string>		v.Local.dDateHold.Set(v.Local.sdate)</string>
+        <string>		f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "FURNACE_DATE",v.Local.dDateHold)</string>
+        <string>	f.Intrinsic.Control.EndIf</string>
+        <string>	f.ODBC.conx!rst.Close</string>
+        <string>f.Intrinsic.Control.Next(v.Local.iCounter)</string>
+        <string />
+        <string>'Function.Data.DataTable.AddColumn("PreProc", "FURNACE_DATE", "date")</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "NUM_TRAYS", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "FURNACE_LOAD", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "MOLD", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "DEBIND", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "SETTING", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "INT_SECONDARIES", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "EXT_SECONDARIES", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "TOTAL_HOURS", "float", 0)</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "TOTAL_DAYS", "float", 0)</string>
+        <string />
+        <string>'Loop through Data Table PreProc</string>
+        <string>f.Intrinsic.Control.For(v.Local.iCounter,0,v.DataTable.PreProc.RowCount--,1)</string>
+        <string>	</string>
+        <string>	'Calculate NUM_TRAYS = QTY_ORDER/NUM_PARTS_PER_TRAY</string>
+        <string>	f.Intrinsic.Control.If(Variable.DataTable.PreProc(v.Local.iCounter).NUM_PARTS_PER_TRAY!FieldValFloat,&lt;&gt;,0)</string>
+        <string>		f.Intrinsic.Math.Div(Variable.DataTable.PreProc(v.Local.iCounter).QTY_ORDER!FieldValFloat,Variable.DataTable.PreProc(v.Local.iCounter).NUM_PARTS_PER_TRAY!FieldValFloat,v.Local.fHold)</string>
+        <string>		Function.Intrinsic.Math.Ceiling(v.Local.fHold, v.Local.iHold)</string>
+        <string>		f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "NUM_TRAYS", V.Local.iHold)		</string>
+        <string>	f.Intrinsic.Control.EndIf</string>
+        <string>	</string>
+        <string>	'Calculate FURNACE_LOAD = NUM_TRAYS/TRAYS_PER_FULL_LOAD</string>
+        <string>	f.Intrinsic.Control.If(Variable.DataTable.PreProc(v.Local.iCounter).TRAYS_PER_FULL_LOAD!FieldValFloat,&lt;&gt;,0)</string>
+        <string>		f.Intrinsic.Math.Div(Variable.DataTable.PreProc(v.Local.iCounter).NUM_TRAYS!FieldValFloat,Variable.DataTable.PreProc(v.Local.iCounter).TRAYS_PER_FULL_LOAD!FieldValFloat,v.Local.fHold)	</string>
+        <string>		f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "FURNACE_LOAD", V.Local.fHold)		</string>
+        <string>	f.Intrinsic.Control.EndIf</string>
+        <string>	</string>
+        <string>	'For each Work Order (specified by each Job + Suffix), calculate the MOLD, DEBIND, SETTING, INT_SECONDARIES, EXT_SECONDARIES =&gt; TOTAL_DAYS</string>
+        <string>	F.Intrinsic.String.Build("SELECT LMO, PART, HOURS_ESTIMATED, LEAD_TIME from V_JOB_OPERATIONS where JOB = '{0}' and SUFFIX = '{1}'",Variable.DataTable.PreProc(v.Local.iCounter).JOB!FieldValString,Variable.DataTable.PreProc(v.Local.iCounter).SUFFIX!FieldValString,V.Local.sSql)</string>
+        <string>	F.Data.DataTable.CreateFromSQL("WO_DETAILS", "conx", V.Local.sSql , true)</string>
+        <string>	v.Local.fMold.Set(0)</string>
+        <string>	v.Local.fDebind.Set(0)</string>
+        <string>	v.Local.fSetting.Set(0)</string>
+        <string>	v.Local.fInt_Secondaries.Set(0)</string>
+        <string>	v.Local.fExt_Secondaries.Set(0)</string>
+        <string>	v.Local.fTotalHours.Set(0)</string>
+        <string>	</string>
+        <string>	f.Intrinsic.Control.For(v.Local.iCounterWO_Details,0,v.DataTable.WO_DETAILS.RowCount--,1)</string>
+        <string>		'set the lead time	</string>
+        <string>		v.Local.fLeadTime.Set(Variable.DataTable.WO_Details(v.Local.iCounterWO_Details).LEAD_TIME!FieldValString)</string>
+        <string>		</string>
+        <string>		F.Intrinsic.Control.If(Variable.DataTable.WO_Details(v.Local.iCounterWO_Details).LMO!FieldValString,=,"L")</string>
+        <string>			'Calculating MOLD time in Hours</string>
+        <string>			'WORKCENTER or WORKGROUP = MLxx</string>
+        <string>			f.Intrinsic.String.Left(v.DataTable.WO_Details(v.Local.iCounterWO_Details).PART!FieldValString,2,V.Local.sHold)</string>
+        <string>			f.Intrinsic.Control.If(V.Local.sHold,=,"ML")</string>
+        <string>				f.Intrinsic.Math.Add(v.Local.fMold,v.DataTable.WO_Details(v.Local.iCounterWO_Details).HOURS_ESTIMATED!FieldValFloat,v.Local.fMold)					</string>
+        <string>			F.Intrinsic.Control.ENDIF				</string>
+        <string>			f.Intrinsic.String.Left(v.DataTable.WO_Details(v.Local.iCounterWO_Details).PART!FieldValString,4,V.Local.sHold)</string>
+        <string>			f.Intrinsic.Control.If(V.Local.sHold,=,"MOLD")</string>
+        <string>				f.Intrinsic.Math.Add(v.Local.fMold,v.DataTable.WO_Details(v.Local.iCounterWO_Details).HOURS_ESTIMATED!FieldValFloat,v.Local.fMold)					</string>
+        <string>			F.Intrinsic.Control.ENDIF</string>
+        <string>	</string>
+        <string>			'Calculating SETTING time in hours</string>
+        <string>			f.Intrinsic.String.Left(v.DataTable.WO_Details(v.Local.iCounterWO_Details).PART!FieldValString,4,V.Local.sHold)</string>
+        <string>			f.Intrinsic.Control.If(V.Local.sHold,=,"ST01")</string>
+        <string>				f.Intrinsic.Math.Add(v.Local.fMold,v.DataTable.WO_Details(v.Local.iCounterWO_Details).HOURS_ESTIMATED!FieldValFloat,v.Local.fMold)					</string>
+        <string>			F.Intrinsic.Control.ENDIF</string>
+        <string>			</string>
+        <string>			'Calculating DEBIND time in hours</string>
+        <string>			f.Intrinsic.String.Left(v.DataTable.WO_Details(v.Local.iCounterWO_Details).PART!FieldValString,4,V.Local.sHold)</string>
+        <string>			f.Intrinsic.Control.If(V.Local.sHold,=,"DS01")</string>
+        <string>				f.Intrinsic.Math.Add(v.Local.fSetting,v.DataTable.WO_Details(v.Local.iCounterWO_Details).HOURS_ESTIMATED!FieldValFloat,v.Local.fMold)					</string>
+        <string>			F.Intrinsic.Control.ENDIF</string>
+        <string>			</string>
+        <string>			'internal secondaries will be non setting, debind etc</string>
+        <string>			f.Intrinsic.Control.If(v.Local.sHold,&lt;&gt;,"DS01")</string>
+        <string>			f.Intrinsic.Control.AndIf(v.Local.sHold,&lt;&gt;,"ST01")</string>
+        <string>			f.Intrinsic.Control.AndIf(v.Local.sHold,&lt;&gt;,"ML")</string>
+        <string>			f.Intrinsic.Control.AndIf(v.Local.sHold,&lt;&gt;,"MOLD")</string>
+        <string>				F.Intrinsic.Math.Add(V.Local.fInt_Secondaries,v.Local.fLeadTime,v.Local.fInt_Secondaries)</string>
+        <string>			f.Intrinsic.Control.EndIf</string>
+        <string>			</string>
+        <string>		f.Intrinsic.Control.ElseIf((Variable.DataTable.PreProc(v.Local.iCounterWO_Details).LMO!FieldValString,=,"O")</string>
+        <string>			'Calculate EXT_SECONDARIES</string>
+        <string>			F.Intrinsic.Math.Add(V.Local.fExt_Secondaries,v.Local.fLeadTime,v.Local.fExt_Secondaries)								</string>
+        <string>		f.Intrinsic.Control.EndIf	</string>
+        <string>	f.Intrinsic.Control.Next(v.Local.iCounterWO_Details)</string>
+        <string />
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "MOLD",v.Local.fMold)</string>
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "DEBIND",v.Local.fDebind)</string>
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "SETTING",v.Local.fSetting)</string>
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "INT_SECONDARIES",v.Local.fInt_Secondaries)</string>
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "EXT_SECONDARIES",v.Local.fExt_Secondaries)</string>
+        <string>	</string>
+        <string>	'Calculating TOTAL_HOURS</string>
+        <string>	F.Intrinsic.Math.Add(V.Local.fMold,V.Local.fDebind,V.Local.fSetting,V.Local.fInt_Secondaries,V.Local.fExt_Secondaries,V.Local.fTotalHours)</string>
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "TOTAL_HOURS",v.Local.fTotalHours)</string>
+        <string>	</string>
+        <string>	'Calculating TOTAL_DAYS</string>
+        <string>	F.Intrinsic.Math.Div(V.Local.fTotalHours,8,V.Local.fHold)</string>
+        <string>	Function.Intrinsic.Math.Ceiling(v.Local.fHold, v.Local.iHold)</string>
+        <string>	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "TOTAL_DAYS",v.Local.iHold)</string>
+        <string>	</string>
+        <string>	'Calculating FURNACE_DATE</string>
+        <string>'	Function.Intrinsic.Date.DateSubtractWorkdays(Variable.DataTable.PreProc(v.Local.iCounter).DATE_DUE!FieldValPervasiveDate, v.Local.iHold, v.Local.dDateHold)</string>
+        <string>'	f.Data.DataTable.SetValue("PreProc", v.Local.iCounter, "FURNACE_DATE", V.Local.dDateHold)</string>
+        <string>	</string>
+        <string>	'This is a changed added by WAW, customer Kellie Shontz requested the Due Date from the sintering sequence</string>
+        <string />
+        <string>			</string>
+        <string>	Function.Data.DataTable.Close("WO_DETAILS")	</string>
+        <string>	v.Local.iCounterWO_Details.Set(0)</string>
+        <string />
+        <string>f.Intrinsic.Control.Next(v.Local.iCounter)</string>
+        <string />
+        <string />
+        <string>'GENERATING REPORT</string>
+        <string>V.Local..BulkDeclareString(sParam,sVal)</string>
+        <string>F.Global.BI.GetRunID(V.Global.iBIRunID)</string>
+        <string>F.Global.BI.StartLogging(V.Global.iBIRunID,-1,-1,"",V.Global.iBILogID)</string>
+        <string />
+        <string>'Fill BIRUNID</string>
+        <string>Function.Data.DataTable.AddColumn("PreProc", "BIRUNID", "long", Variable.Global.iBIRunID)</string>
+        <string />
+        <string>'Save to DataBase</string>
+        <string>v.Local.sMap.Set("BIRUNID@!@BIRUNID*!*JOB@!@JOB*!*SUFFIX@!@SUFFIX*!*PART@!@PART*!*LOCATION@!@LOCATION*!*FURNACE@!@FURNACE*!*TRAYS_PER_FULL_LOAD@!@TRAYS_PER_FULL_LOAD")</string>
+        <string>F.Intrinsic.String.Build("{0}{1}",V.Local.sMap,"*!*FURNACE_DATE@!@FURNACE_DATE*!*DATE_DUE@!@DATE_DUE*!*QTY_ORDER@!@QTY_ORDER*!*NUM_TRAYS@!@NUM_TRAYS*!*FURNACE_LOAD@!@FURNACE_LOAD*!*MOLD@!@MOLD", V.Local.sMap)</string>
+        <string>F.Intrinsic.String.Build("{0}{1}",V.Local.sMap,"*!*DEBIND@!@DEBIND*!*SETTING@!@SETTING*!*INT_SECONDARIES@!@INT_SECONDARIES*!*EXT_SECONDARIES@!@EXT_SECONDARIES*!*TOTAL_HOURS@!@TOTAL_HOURS*!*TOTAL_DAYS@!@TOTAL_DAYS", V.Local.sMap)</string>
+        <string>Function.Data.DataTable.SaveToDB("PreProc", "conx", "GCG_4273_FURNACE_RPT", "JOB*!*SUFFIX",256, v.Local.sMap)</string>
+        <string>f.Data.DataTable.Close("PreProc")</string>
+        <string />
+        <string>'Stop Logging</string>
+        <string>F.Global.BI.StopLogging(V.Global.iBILogID)</string>
+        <string>V.Local.sVal.Set(V.Global.iBIRunID)</string>
+        <string>V.Local.sParam.Set("BIRUNID")</string>
+        <string />
+        <string>'Print the Report</string>
+        <string>F.Global.BI.RunReportPreProcessor(V.Global.iBIRunID,V.Global.iBILogID,V.Local.sParam,V.Local.sVal,"",-1,True,"",-1,"",-1,"","",V.Global.iBIRunID)</string>
+        <string>						 </string>
+        <string>f.Intrinsic.UI.CloseWaitDialog</string>
+        <string>f.Intrinsic.Control.End</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Print_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4273_PreProc.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	f.Intrinsic.Control.End</string>
+        <string />
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.cmdPrint_Click.End</string>
+        <string />
+        <string>Program.Sub.Comments.Start</string>
+        <string>${$0$}$$}$$}$12/20/2016 9:43:03 AM$}$False</string>
+        <string>${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This was coded by FEQ on December 2016. It adds a screen to the script 1 button on the inventory master screen to save furnace information to parts, as well as a screen to add a furnace to a work order on the work order header screen</string>
+        <string>Program.Sub.Comments.End</string>
+      </Lines>
+    </TextStrings>
+  </TextSource>
+  <Scrolling>
+    <WindowOriginY>194</WindowOriginY>
+  </Scrolling>
+  <Outlining>
+    <AllowOutlining>true</AllowOutlining>
+    <ImageSize>8</ImageSize>
+    <Ranges>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>0</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>24</Y>
+        </EndPoint>
+        <Text>Program.Sub.ScreenSU</Text>
+        <DisplayText>Program.Sub.ScreenSU</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>26</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>29</Y>
+        </EndPoint>
+        <Text>Program.Sub.Preflight</Text>
+        <DisplayText>Program.Sub.Preflight</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>31</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>56</Y>
+        </EndPoint>
+        <Text>Program.Sub.Main</Text>
+        <DisplayText>Program.Sub.Main</DisplayText>
+        <Visible>true</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>58</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>76</Y>
+        </EndPoint>
+        <Text>Program.Sub.ReportProcess_UnLoad</Text>
+        <DisplayText>Program.Sub.ReportProcess_UnLoad</DisplayText>
+        <Visible>true</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>78</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>272</Y>
+        </EndPoint>
+        <Text>Program.Sub.cmdPrint_Click</Text>
+        <DisplayText>Program.Sub.cmdPrint_Click</DisplayText>
+        <Visible>true</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>274</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>277</Y>
+        </EndPoint>
+        <Text>Program.Sub.Comments</Text>
+        <DisplayText>Program.Sub.Comments</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+    </Ranges>
+  </Outlining>
+  <HyperText />
+  <Spelling />
+  <Braces />
+</SyntaxEdit>
