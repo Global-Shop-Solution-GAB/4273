@@ -1,0 +1,371 @@
+Program.Sub.ScreenSU.Start
+Gui.F_PartInfo..Create
+Gui.F_PartInfo..Caption("Furnace Information")
+Gui.F_PartInfo..Size(5415,2715)
+Gui.F_PartInfo..MinX(0)
+Gui.F_PartInfo..MinY(0)
+Gui.F_PartInfo..Position(0,0)
+Gui.F_PartInfo..BackColor(-2147483633)
+Gui.F_PartInfo..MousePointer(0)
+Gui.F_PartInfo..Event(UnLoad,unload)
+Gui.F_PartInfo.lblPart.Create(Label,"Part",True,1500,255,0,195,195,True,0,"Arial",8,-2147483633,0)
+Gui.F_PartInfo.lblLoc.Create(Label,"Loc",True,1935,255,0,2505,195,True,0,"Arial",8,-2147483633,0)
+Gui.F_PartInfo.lblFurnace.Create(Label,"Furnace",True,1935,255,0,195,900,True,0,"Arial",8,-2147483633,0)
+Gui.F_PartInfo.lblTrays.Create(Label,"Parts per Tray",True,1245,255,0,2205,900,True,0,"Arial",8,-2147483633,0)
+Gui.F_PartInfo.lblPPH.Create(Label,"Parts per Hour",True,1245,255,0,3615,900,True,0,"Arial",8,-2147483633,0)
+Gui.F_PartInfo.txtPart.Create(TextBox,"",True,1995,300,0,195,405,False,0,"Arial",8,-2147483643,1)
+Gui.F_PartInfo.txtPart.Locked(True)
+Gui.F_PartInfo.txtLoc.Create(TextBox,"",True,495,300,0,2505,405,False,0,"Arial",8,-2147483643,1)
+Gui.F_PartInfo.txtLoc.Locked(True)
+Gui.F_PartInfo.txtFurnace.Create(TextBox,"",True,1320,300,0,195,1095,False,0,"Arial",8,-2147483643,1)
+Gui.F_PartInfo.txtPPT.Create(TextBox,"",True,1215,300,0,2220,1095,True,0,"Arial",8,-2147483643,1)
+Gui.F_PartInfo.txtPPT.NumericOnly(True)
+Gui.F_PartInfo.txtPPT.MaxLength(13)
+Gui.F_PartInfo.txtPPH.Create(TextBox,"",True,1215,300,0,3615,1095,True,0,"Arial",8,-2147483643,1)
+Gui.F_PartInfo.txtPPH.NumericOnly(True)
+Gui.F_PartInfo.txtPPH.MaxLength(13)
+Gui.F_PartInfo.cmd1.Create(Button)
+Gui.F_PartInfo.cmd1.Size(855,375)
+Gui.F_PartInfo.cmd1.Position(255,1545)
+Gui.F_PartInfo.cmd1.Caption("Update")
+Gui.F_PartInfo.cmd1.Event(Click,cmd1_Click)
+Gui.F_PartInfo.lblCook.Create(Label,"Cook Time (Mins)",False,1935,255,0,4695,900,False,0,"Arial",8,-2147483633,0)
+Gui.F_PartInfo.txtCook.Create(TextBox,"",False,1215,300,0,4695,1095,False,0,"Arial",8,-2147483643,1)
+Gui.F_PartInfo.txtCook.NumericOnly(True)
+Gui.F_PartInfo.txtCook.Locked(True)
+Gui.F_PartInfo.cmdBrowser.Create(Button)
+Gui.F_PartInfo.cmdBrowser.Size(435,375)
+Gui.F_PartInfo.cmdBrowser.Position(1545,1050)
+Gui.F_PartInfo.cmdBrowser.Caption("^")
+Gui.F_PartInfo.cmdBrowser.Event(Click,cmdBrowser_Click)
+Gui.F_WOInfo..Create
+Gui.F_WOInfo..Caption("Furnace for Work Order")
+Gui.F_WOInfo..Size(4500,1995)
+Gui.F_WOInfo..MinX(0)
+Gui.F_WOInfo..MinY(0)
+Gui.F_WOInfo..Position(0,0)
+Gui.F_WOInfo..BackColor(-2147483633)
+Gui.F_WOInfo..MousePointer(0)
+Gui.F_WOInfo..Event(UnLoad,unload)
+Gui.F_WOInfo.lblFurn.Create(Label,"Furnace",True,1935,255,0,195,195,True,0,"Arial",8,-2147483633,0)
+Gui.F_WOInfo.txtFurn.Create(TextBox,"",True,3000,300,0,195,450,True,0,"Arial",8,-2147483643,1)
+Gui.F_WOInfo.txtFurn.Locked(True)
+Gui.F_WOInfo.cmdBrows.Create(Button)
+Gui.F_WOInfo.cmdBrows.Size(375,375)
+Gui.F_WOInfo.cmdBrows.Position(3495,405)
+Gui.F_WOInfo.cmdBrows.Caption("^")
+Gui.F_WOInfo.cmdBrows.Event(Click,cmdBrows_Click)
+Gui.F_WOInfo.cmdSave.Create(Button)
+Gui.F_WOInfo.cmdSave.Size(855,375)
+Gui.F_WOInfo.cmdSave.Position(195,900)
+Gui.F_WOInfo.cmdSave.Caption("Save")
+Gui.F_WOInfo.cmdSave.Event(Click,cmdSave_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'FEQ 12/16/2016
+'Attached to hooks 10120, 10210, for the inventory master screen, and 16630, 16670 for the work order header screen
+
+V.Local.sHook.Declare(String)
+
+V.Local.sHook.Set(V.Caller.Hook)
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN, V.Ambient.PUser, V.Ambient.PPass)
+
+F.Intrinsic.Control.SelectCase(V.Local.sHook)
+'Hook 10120 is the populate hook on the inventory master screen
+F.Intrinsic.Control.Case("10120")
+	V.Passed.000068.Set("Furnace Info")
+'Hook 10210 fires when the Script 1 button on the inventory master screen gets clicked
+F.Intrinsic.Control.Case("10210")
+	F.Intrinsic.Control.If(V.Passed.000007.Trim, =, "")
+		F.Intrinsic.UI.Msgbox("Please select a Part", "No Part Selected")
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Control.CallSub(poppartfurn)
+		Gui.F_PartInfo..Show
+	F.Intrinsic.Control.EndIf
+'Hook 16630 is the populate hook for the Work Order header screen
+'F.Intrinsic.Control.Case("16630")
+'	V.Passed.000091.Set("Furnace Info")
+'Hook 16670 fires when the Script 1 button on the work order header screen gets clicked
+'F.Intrinsic.Control.Case("16670")
+'	F.Intrinsic.Control.If(V.Passed.000003.Trim, =, "")
+'		F.Intrinsic.UI.Msgbox("Please select a Work Order", "No Work Order Selected")
+'	F.Intrinsic.Control.Else
+'		F.Intrinsic.Control.CallSub(popfurn)
+'		Gui.F_WOInfo..Show
+'	F.Intrinsic.Control.EndIf	
+F.Intrinsic.Control.EndSelect
+
+
+Program.Sub.Main.End
+
+Program.Sub.PopPartFurn.Start
+F.Intrinsic.Control.SetErrorHandler("PopPartFurn_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+V.Local.sPart.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+'V.Local.fCook.Declare(Float)
+
+'Make part concoction and browse for furnace info
+F.Global.Inventory.GetGSSPart(V.Passed.000007, V.Passed.000008, V.Local.sPart)
+F.Intrinsic.String.Build("Select FURNACE, NUM_PARTS_PER_TRAY, NUM_PARTS_PER_HOUR from GCG_4273_PART_FURN where PART = '{0}' and LOC = '{1}' ", V.Local.sPart, V.Passed.000009.Trim, V.Local.sSql)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSql, V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet, <>, "")
+	F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+	Gui.F_PartInfo.txtFurnace.Text(V.Local.sRet(0))
+	Gui.F_PartInfo.txtPPT.Text(V.Local.sRet(1).Float)
+	Gui.F_PartInfo.txtPPH.Text(V.Local.sRet(2).Float)
+'	F.Intrinsic.Math.Mult(V.Local.sRet(3).Float, 60, V.Local.fCook)
+'	F.Intrinsic.Math.Round(V.Local.fCook, 0, V.Local.fCook)
+'	Gui.F_PartInfo.txtCook.Text(V.Local.fCook)
+F.Intrinsic.Control.Else
+	Gui.F_PartInfo.txtFurnace.Text("")
+	Gui.F_PartInfo.txtPPT.Text("")
+	Gui.F_PartInfo.txtPPH.Text("")
+'	Gui.F_PartInfo.txtCook.Text("")
+F.Intrinsic.Control.EndIf
+
+Gui.F_PartInfo.txtPart.Text(V.Local.sPart)
+Gui.F_PartInfo.txtLoc.Text(V.Passed.000009)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("PopPartFurn_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.PopPartFurn.End
+
+Program.Sub.cmd1_Click.Start
+F.Intrinsic.Control.SetErrorHandler("PopPartFurn_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.sSql.Declare(String)
+V.Local.sFurn.Declare(String)
+V.Local.bNum.Declare(boolean, False)
+
+'check numberic
+F.Intrinsic.Math.IsNumeric(V.Screen.F_PartInfo!txtPPT.Text, V.Local.bNum)
+Function.Intrinsic.Control.If(V.Local.bNum, =, False)
+	f.Intrinsic.UI.Msgbox("Parts Per Tray must be Numberic")
+	Function.Intrinsic.Control.ExitSub
+Function.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.IsNumeric(V.Screen.F_PartInfo!txtPPH.Text, V.Local.bNum)
+Function.Intrinsic.Control.If(V.Local.bNum, =, False)
+	f.Intrinsic.UI.Msgbox("Parts Per Hour must be Numberic")
+	Function.Intrinsic.Control.ExitSub
+Function.Intrinsic.Control.EndIf
+
+Function.Intrinsic.Control.If(V.Screen.F_PartInfo!txtFurnace.Text, =, "")
+	f.Intrinsic.UI.Msgbox("Choose a Furnace")
+	Function.Intrinsic.Control.ExitSub
+Function.Intrinsic.Control.ElseIf(V.Screen.F_PartInfo!txtPPT.Text, =, "")
+	f.Intrinsic.UI.Msgbox("Enter Parts Per Tray")
+	Function.Intrinsic.Control.ExitSub
+Function.Intrinsic.Control.ElseIf(V.Screen.F_PartInfo!txtPPH.Text, =, "")
+	f.Intrinsic.UI.Msgbox("Enter Parts Per Hour")
+	Function.Intrinsic.Control.ExitSub
+Function.Intrinsic.Control.EndIf
+
+V.Local.sFurn.Set(V.Screen.F_PartInfo!txtFurnace.Text)
+F.Intrinsic.Control.If(v.Local.sFurn.Trim, <>, "")
+	F.Intrinsic.String.Build("Select * from GCG_4273_PART_FURN where Part = '{0}' and Loc = '{1}' ", V.Screen.F_PartInfo!txtPart.Text, V.Screen.F_PartInfo!txtLoc.Text, V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRW("rst", V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF, =, True)
+		F.ODBC.con!rst.AddNew
+		F.ODBC.con!rst.Set!PART(V.Screen.F_PartInfo!txtPart.Text)
+		F.ODBC.con!rst.Set!LOC(V.Screen.F_PartInfo!txtLoc.Text)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Set!FURNACE(V.Local.sFurn.Trim)
+	F.ODBC.con!rst.Set!NUM_PARTS_PER_TRAY(V.Screen.F_PartInfo!txtPPT.Text)
+	F.ODBC.con!rst.Set!NUM_PARTS_PER_HOUR(V.Screen.F_PartInfo!txtPPH.Text)
+'	V.Local.fCooktime.Set(V.Screen.F_PartInfo!txtCook.Text)
+'	F.Intrinsic.Math.Div(V.Local.fCooktime, 60, V.Local.fCooktime)
+'	F.ODBC.con!rst.Set!SINTERING_TIME(V.Local.fCooktime)
+	F.ODBC.con!rst.Update
+	F.ODBC.con!rst.Close
+	F.Intrinsic.Control.CallSub(unload)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("PopPartFurn_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmd1_Click.End
+
+Program.Sub.PopFurn.Start
+F.Intrinsic.Control.SetErrorHandler("PopFurn_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+
+'Populate furnace if it already exists
+F.Intrinsic.String.Build("Select FURNACE from GCG_4273_WORKORDER where JOB = '{0}' and SUFFIX = '{1}' ", V.Passed.000003, V.Passed.000004, V.Local.sSql)
+F.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSql, V.Local.sRet)
+Gui.F_WOInfo.txtFurn.Text(V.Local.sRet)
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("PopFurn_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)	
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.PopFurn.End
+
+Program.Sub.cmdBrows_Click.Start
+F.Intrinsic.Control.SetErrorHandler("PopFurn_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+V.Local.sSql.Declare(String)
+V.Local.sTitles.Declare(String)
+V.Local.iWidth.Declare(Long)
+V.Local.sRet.Declare(String)
+
+V.Local.sSql.Set("Select distinct FURNACE as Furnace, FURNACE_LOAD as Load, SETTING_HOURS as 'Setting Hours' from GCG_4273_FURNACE_MNT ")
+F.Intrinsic.String.Split("Furnace*!*Load*!*Setting Hours", "*!*", V.Local.sTitles)
+F.Intrinsic.String.Split("1000*!*0*!*0", "*!*", V.Local.iWidth)
+F.Intrinsic.UI.MiniBrowser("Select a Furnace", "con", V.Local.sSql, V.Local.sTitles, V.Local.iWidth, V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet, <>, "***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+	Gui.F_WOInfo.txtFurn.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("PopFurn_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmdBrows_Click.End
+
+Program.Sub.cmdSave_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdBrows_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+V.Local.sFurn.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sFurn.Set(V.Screen.F_WOInfo!txtFurn.Text)
+F.Intrinsic.Control.If(V.Local.sFurn.Trim, <>, "")
+	F.Intrinsic.String.Build("Select * from GCG_4273_WORKORDER where JOB = '{0}' and SUFFIX = '{1}' ", V.Passed.000003, V.Passed.000004, V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRW("rstF", V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstF.EOF, =, True)
+		F.ODBC.con!rstF.AddNew
+		F.ODBC.con!rstF.Set!JOB(V.Passed.000003)
+		F.ODBC.con!rstF.Set!SUFFIX(V.Passed.000004)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstF.Set!FURNACE(V.Local.sFurn)
+	F.ODBC.con!rstF.Update
+	F.ODBC.con!rstF.Close
+	F.Intrinsic.Control.CallSub(unload)
+F.Intrinsic.Control.EndIf
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdBrows_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmdSave_Click.End
+
+Program.Sub.unload.Start
+F.Intrinsic.Control.SetErrorHandler("unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+Program.Sub.unload.End
+
+Program.Sub.cmdBrowser_Click.Start
+F.Intrinsic.Control.SetErrorHandler("unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+Variable.Local.sRet.Declare(string)
+Variable.Local.sTemp.Declare(string)
+Variable.Local.sTitles.Declare(string)
+Variable.Local.iWidths.Declare(long)
+
+variable.local.sTitles.Set("FURNACE")
+variable.local.iWidths.Set(1000)
+Function.Intrinsic.UI.Browser("Select a FURNACE","con","Select FURNACE From GCG_4273_FURNACE_MNT",variable.local.sTitles,variable.local.iWidths,Variable.Local.sRet)
+Function.Intrinsic.Control.If(Variable.Local.sRet,"=","***CANCEL***")
+ 	Function.Intrinsic.UI.Msgbox("No FURNACE was selected!")
+Function.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(Variable.Local.sRet,"*!*",Variable.Local.sRet)
+	GUI.F_PartInfo.txtFurnace.Text(Variable.Local.sRet)
+Function.Intrinsic.Control.EndIf
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4273_Screens.g2c",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	Function.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmdBrowser_Click.End
+
+Program.Sub.Comments.Start
+${$0$}$Furnace Maintenance project$}$SISCO$}$12/19/2016 10:52:21 AM$}$False
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This was coded by FEQ on December 2016. It adds a screen to the script 1 button on the inventory master screen to save furnace information to parts, as well as a screen to add a furnace to a work order on the work order header screen
+Program.Sub.Comments.End
